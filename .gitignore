@@ -25,20 +25,23 @@ node_modules/
 
 # Flutter/Dart/Pub related
 **/doc/api/
-.dart_tool/
-.flutter-plugins
-.packages
-.pub-cache/
-.pub/
-build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/build/
 
-android/UnityExport/
+**/android/UnityExport/
+**/ios/UnityExport/
 
 #example/
 example/unity/DemoApp/Builds/
 example/unity/DemoApp/Library/
 example/unity/DemoApp/Logs/
 example/unity/DemoApp/Temp/
+example/unity/DemoApp/.vs
+example/coverage/
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -48,6 +51,9 @@ example/unity/DemoApp/Temp/
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
+
+**/android/key.properties
+*.jks
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -74,6 +80,7 @@ example/unity/DemoApp/Temp/
 **/ios/Flutter/flutter_assets/
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Flutter/flutter_export_environment.sh
 
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3

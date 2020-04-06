@@ -24,37 +24,33 @@ class UnityWidgetController {
     );
   }
 
-  Future<bool> isReady() async {
-    final bool isReady = await channel.invokeMethod('isReady');
-    return isReady;
-  }
+  /// Returns true if Unity is ready and false otherwise.
+  Future<bool> isReady() => channel.invokeMethod('isReady');
 
-  Future<bool> createUnity() async {
-    final bool isReady = await channel.invokeMethod('createUnity');
-    return isReady;
-  }
+  /// Returns true once Unity is ready.
+  Future<bool> createUnity() => channel.invokeMethod('createUnity');
 
-  postMessage(String gameObject, methodName, message) {
-    channel.invokeMethod('postMessage', <String, dynamic>{
+  Future<bool> postMessage(String gameObject, methodName, message) => channel.invokeMethod('postMessage', <String, dynamic>{
       'gameObject': gameObject,
       'methodName': methodName,
       'message': message,
     });
-  }
 
-  pause() async {
+  /// Unless an error is thrown, always returns true.
+  Future<bool> pause() {
     print('Pressed paused');
-    await channel.invokeMethod('pause');
+    return channel.invokeMethod('pause');
   }
 
-  resume() async {
-    await channel.invokeMethod('resume');
-  }
+  /// Unless an error is thrown, always returns true.
+  Future<bool> resume() => channel.invokeMethod('resume');
 
+  /// Called from [UnityWidget.dispose]
   Future<void> _dispose() async {
-    await channel.invokeMethod('dispose');
+    // await channel.invokeMethod('dispose');
   }
 
+  /// Handles a method call from Android (on behalf of Unity) to Flutter.
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case "onUnityMessage":
@@ -136,11 +132,13 @@ class _UnityWidgetState extends State<UnityWidget> {
 
   void _onPlatformViewCreated(int id) {
     _controller = UnityWidgetController.init(id, this);
+    
+    print('--------------------------------------------');
+    print('|          Internal setup complete          ');
+    print('--------------------------------------------');
+
     if (widget.onUnityViewCreated != null) {
       widget.onUnityViewCreated(_controller);
     }
-    print('********************************************');
-    print('Controller setup complete');
-    print('********************************************');
   }
 }
