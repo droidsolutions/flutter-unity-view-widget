@@ -70,6 +70,10 @@
 - (void)onMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if ([[call method] isEqualToString:@"postMessage"]) {
         [self postMessage:call result:result];
+    } else if ([[call method] isEqualToString:@"resume"]) {
+        UnityResumeCommand();
+    } else if ([[call method] isEqualToString:@"pause"]) {
+        UnityPauseCommand();
     } else {
         result(FlutterMethodNotImplemented);
     }
