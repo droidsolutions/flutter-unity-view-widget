@@ -152,6 +152,11 @@ static BOOL _isUnityReady = NO;
         // Always keep RN window in top
         application.keyWindow.windowLevel = UIWindowLevelNormal + 1;
 
+        if (_isUnityReady) {
+          completed();
+          return;
+        }
+        
         InitUnity();
 
         UnityAppController *controller = GetAppController();
