@@ -63,7 +63,21 @@
         [_channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
             [weakSelf onMethodCall:call result:result];
         }];
+        
+        _uView = [[FlutterUnityView alloc] init];
+        if ([UnityUtils isUnityReady]) {
+            [_uView setUnityView: (UIView*)[GetAppController() unityView]];
+        } else {
+            [UnityUtils createPlayer:^{
+                 [_uView setUnityView: (UIView*)[GetAppController() unityView]];
+            }];
+            [GetAppController() setUnityMessageHandler: ^(const char* message)
+            {
+                 [_channel invokeMethod:@"onUnityMessage" arguments:[NSString stringWithUTF8String:message]];
+             }];
+         }
     }
+    
     return self;
 }
 
@@ -89,6 +103,7 @@
     result(nil);
 }
 
+/*
 - (UIView*)view {
     _uView = [[FlutterUnityView alloc] init];
     if ([UnityUtils isUnityReady]) {
@@ -104,6 +119,13 @@
     }
     return _uView;
 }
+*/
+
+- (UIView*)view {
+    return _uView;
+}
+
+
 
 @end
 
