@@ -6,11 +6,13 @@ import android.content.Context;
 import android.os.Debug;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.platform.PlatformView;
+
 
 @SuppressLint("NewApi")
 public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallHandler, UnityEventListener {
